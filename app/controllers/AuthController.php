@@ -27,7 +27,7 @@ class AuthController extends \BaseController
         $user->username = Input::get('username');
         $user->password = Hash::make(Input::get('password'));
         $user->type = Input::get('type');
-        $user->confirmed = false;
+        $user->active = false;
 
         $identifier = 0;
         if (Input::get('type') === 'siswa') {

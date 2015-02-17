@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('GuruTableSeeder');
 		$this->call('StandarKompetensiTableSeeder');
 		$this->call('NilaiTableSeeder');
+		$this->call('UserTableSeeder');
 	}
 
 }

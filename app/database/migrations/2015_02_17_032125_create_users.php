@@ -18,7 +18,7 @@ class CreateUsers extends Migration {
 			$table->string('username', 50)->unique();
 			$table->string('password');
 			$table->string('remember_token');
-			$table->boolean('confirmed')->default(false);
+			$table->boolean('active')->default(false);
 			$table->string('type', 20);
 			$table->integer('identifier')->unsigned()->nullable();
 		});

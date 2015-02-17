@@ -25,7 +25,14 @@ Route::group(['before' => 'auth'], function () {
             Route::get('{table}/{id}/edit', ['as' => 'admin.crud.edit.form', 'uses' => 'CrudController@edit']);
             Route::post('{table}/{id}', ['as' => 'admin.crud.edit', 'uses' => 'CrudController@update']);
 
-            Route::get('{table}/{id}', ['as' => 'admin.crud.delete', 'uses' => 'CrudController@destroy']);
+            Route::get('{table}/{id}/delete', ['as' => 'admin.crud.delete', 'uses' => 'CrudController@destroy']);
+        });
+
+        Route::group(['prefix' => 'user'], function() {
+            Route::get('', ['as' => 'admin.user.list', 'uses' => 'AdminController@listUser']);
+            Route::get('{id}/activate', ['as' => 'admin.user.activate', 'uses' => 'AdminController@activateUser']);
+            Route::get('{id}/deactivate', ['as' => 'admin.user.deactivate', 'uses' => 'AdminController@deactivateUser']);
+            Route::get('{id}/delete', ['as' => 'admin.user.delete', 'uses' => 'AdminController@deleteUser']);
         });
     });
 
