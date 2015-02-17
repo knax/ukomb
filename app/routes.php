@@ -37,6 +37,17 @@ Route::group(['before' => 'auth'], function () {
         });
     });
 
+    Route::group(['prefix' => 'siswa'], function(){
+
+        Route::group(['prefix' => 'nilai'], function(){
+            Route::get('', ['as' => 'siswa.nilai.index', 'uses' => 'SiswaController@listNilai']);
+        });
+
+        Route::get('data_diri', ['as' => 'siswa.data_diri', 'uses' => 'SiswaController@dataDiri']);
+        Route::get('data_diri/edit', ['as' => 'siswa.data_diri.edit.form', 'uses' => 'SiswaController@editDataDiriForm']);
+        Route::post('data_diri', ['as' => 'siswa.data_diri.edit', 'uses' => 'SiswaController@editDataDiri']);
+    });
+
     Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@logout']);
 
     Route::get('change_password', ['as' => 'auth.change_password.form', 'uses' => 'AuthController@changePasswordForm']);

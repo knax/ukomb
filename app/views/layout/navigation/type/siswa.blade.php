@@ -1,2 +1,2 @@
 <li><a href="#">Nilai</a></li>
-<li><a href="#">Data Diri</a></li>
+<li><a href="{{action('siswa.data_diri')}}">Data Diri</a></li>
