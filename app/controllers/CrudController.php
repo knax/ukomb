@@ -33,7 +33,7 @@ class CrudController extends \BaseController
         $data['table']['field'] = $this->removeId(Schema::getColumnListing($table));
 
         return View::make('admin.crud.create')->with($data);
-	}
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -115,17 +115,30 @@ class CrudController extends \BaseController
         return Redirect::action('admin.crud.index', ['table' => $table]);
     }
 
+    public function listTable(){
+        $tables = DB::select(DB::raw('SHOW TABLES'));
+        $data['table']['list'] = [];
+        foreach($tables as $table) {
+            $tableArray = (array) $table;
+            $data['table']['list'][] = array_shift($tableArray);
+        }
 
-    private function removeId($header)
-    {
-        $temp = $header;
-        array_shift($temp);
-
-        return $temp;
+        return View::make('admin.crud.list')->with($data);
     }
 
-    private function toClassName($table)
-    {
-        return ucfirst(camel_case($table));
-    }
+
+private
+function removeId($header)
+{
+    $temp = $header;
+    array_shift($temp);
+
+    return $temp;
+}
+
+private
+function toClassName($table)
+{
+    return ucfirst(camel_case($table));
+}
 }

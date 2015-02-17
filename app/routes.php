@@ -17,6 +17,7 @@ Route::group(['before' => 'auth'], function () {
 
     Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => 'crud'], function () {
+            Route::get('', ['as' => 'admin.crud.list', 'uses' => 'CrudController@listTable']);
             Route::get('{table}', ['as' => 'admin.crud.index', 'uses' => 'CrudController@index']);
 
             Route::get('{table}/create', ['as' => 'admin.crud.create.form', 'uses' => 'CrudController@create']);
