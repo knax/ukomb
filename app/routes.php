@@ -38,6 +38,9 @@ Route::group(['before' => 'auth'], function () {
     });
 
     Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@logout']);
+
+    Route::get('change_password', ['as' => 'auth.change_password.form', 'uses' => 'AuthController@changePasswordForm']);
+    Route::post('change_password', ['as' => 'auth.change_password', 'uses' => 'AuthController@changePassword']);
 });
 
 Route::get('login', ['as' => 'auth.login.form', 'uses' => 'AuthController@loginForm']);

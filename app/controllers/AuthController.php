@@ -90,7 +90,7 @@ class AuthController extends \BaseController
 
         $waliMurid->save();
 
-       return $waliMurid->id;
+        return $waliMurid->id;
     }
 
     public function registerForm()
@@ -128,4 +128,34 @@ class AuthController extends \BaseController
         return Redirect::action('auth.login');
     }
 
+    public function changePasswordForm()
+    {
+        return View::make('auth.change_password');
+    }
+
+    public function changePassword()
+    {
+        $currentPassword = Input::get('current_password');
+
+        $newPassword = Input::get('new_password');
+        $confirmPassword = Input::get('confirm_password');
+
+        if ($newPassword != $confirmPassword) {
+            return;
+        }
+
+        $user = Auth::user();
+
+        if (!Auth::validate([
+            'username' => $user->username,
+            'password' => $currentPassword
+        ])
+        ) {
+            return;
+        }
+        $user->password = Hash::make($newPassword);
+        $user->save();
+
+        return Redirect::action('homepage');
+    }
 }

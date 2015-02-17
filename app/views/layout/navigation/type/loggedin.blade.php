@@ -1,5 +1,5 @@
 <ul class="nav navbar-nav">
-    <li><a href="#">Home</a></li>
+    <li><a href="{{action('homepage')}}">Home</a></li>
     @if(Auth::user()->active)
         @if(Auth::user()->type == 'siswa')
             @include('layout.navigation.type.siswa')
@@ -18,6 +18,7 @@
             {{Auth::user()->username}} <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
+            <li><a href="{{action('auth.change_password.form')}}">Change Password</a></li>
             <li><a href="{{action('auth.logout')}}">Logout</a></li>
         </ul>
     </li>
