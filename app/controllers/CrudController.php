@@ -126,6 +126,20 @@ class CrudController extends \BaseController
         return View::make('admin.crud.list')->with($data);
     }
 
+    public function report($table) {
+        $pdf = App::make('dompdf');
+
+        $className = $this->toClassName($table);
+
+        $data['table']['name'] = $table;
+        $data['table']['field'] = Schema::getColumnListing($table);
+        $data['table']['body'] = $className::all();
+
+        $pdf->loadView('admin.crud.report', $data);
+        return $pdf->stream();
+    }
+
+
 
 private
 function removeId($header)

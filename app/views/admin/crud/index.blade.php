@@ -30,5 +30,6 @@
     {{$table['body']->links()}}
     <hr/>
     <a class="btn btn-primary" href="{{action('admin.crud.create.form', ['table' => $table['name']])}}">Create</a>
+    <a class="btn btn-default" href="{{action('admin.crud.report', ['table' => $table['name']])}}">Report</a>
     <hr/>
 @endsection

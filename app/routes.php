@@ -27,6 +27,8 @@ Route::group(['before' => 'auth'], function () {
             Route::post('{table}/{id}', ['as' => 'admin.crud.edit', 'uses' => 'CrudController@update']);
 
             Route::get('{table}/{id}/delete', ['as' => 'admin.crud.delete', 'uses' => 'CrudController@destroy']);
+
+            Route::get('{table}/report', ['as' => 'admin.crud.report', 'uses' => 'CrudController@report']);
         });
 
         Route::group(['prefix' => 'user'], function () {
