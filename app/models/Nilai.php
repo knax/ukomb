@@ -15,4 +15,9 @@ class Nilai extends BaseModel {
     {
         return $this->belongsTo('Guru', 'guru_id', 'id');
     }
+
+    public function siswa()
+    {
+        return $this->belongsTo('Siswa', 'siswa_id', 'id');
+    }
 }

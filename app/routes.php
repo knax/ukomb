@@ -29,23 +29,46 @@ Route::group(['before' => 'auth'], function () {
             Route::get('{table}/{id}/delete', ['as' => 'admin.crud.delete', 'uses' => 'CrudController@destroy']);
         });
 
-        Route::group(['prefix' => 'user'], function() {
+        Route::group(['prefix' => 'user'], function () {
             Route::get('', ['as' => 'admin.user.list', 'uses' => 'AdminController@listUser']);
             Route::get('{id}/activate', ['as' => 'admin.user.activate', 'uses' => 'AdminController@activateUser']);
-            Route::get('{id}/deactivate', ['as' => 'admin.user.deactivate', 'uses' => 'AdminController@deactivateUser']);
+            Route::get('{id}/deactivate',
+                ['as' => 'admin.user.deactivate', 'uses' => 'AdminController@deactivateUser']);
             Route::get('{id}/delete', ['as' => 'admin.user.delete', 'uses' => 'AdminController@deleteUser']);
         });
     });
 
-    Route::group(['prefix' => 'siswa'], function(){
+    Route::group(['prefix' => 'siswa'], function () {
 
-        Route::group(['prefix' => 'nilai'], function(){
+        Route::group(['prefix' => 'nilai'], function () {
             Route::get('', ['as' => 'siswa.nilai.index', 'uses' => 'SiswaController@listNilai']);
         });
 
-        Route::get('data_diri', ['as' => 'siswa.data_diri', 'uses' => 'SiswaController@dataDiri']);
-        Route::get('data_diri/edit', ['as' => 'siswa.data_diri.edit.form', 'uses' => 'SiswaController@editDataDiriForm']);
-        Route::post('data_diri', ['as' => 'siswa.data_diri.edit', 'uses' => 'SiswaController@editDataDiri']);
+        Route::group(['prefix' => 'data_diri'], function () {
+            Route::get('', ['as' => 'siswa.data_diri', 'uses' => 'SiswaController@dataDiri']);
+            Route::get('edit', ['as' => 'siswa.data_diri.edit.form', 'uses' => 'SiswaController@editDataDiriForm']);
+            Route::post('', ['as' => 'siswa.data_diri.edit', 'uses' => 'SiswaController@editDataDiri']);
+        });
+
+    });
+
+    Route::group(['prefix' => 'guru'], function () {
+        Route::group(['prefix' => 'beri_nilai'], function () {
+            Route::get('', ['as' => 'guru.beri_nilai.list_siswa', 'uses' => 'GuruController@listSiswa']);
+            Route::get('{siswaId}',
+                ['as' => 'guru.beri_nilai.standar_kompetensi', 'uses' => 'GuruController@listStandarKompetensi']);
+            Route::get('{siswaId}/{standarKompetensiId}',
+                ['as' => 'guru.beri_nilai.form', 'uses' => 'GuruController@beriNilaiForm']);
+            Route::post('{siswaId}/{standarKompetensiId}',
+                ['as' => 'guru.beri_nilai', 'uses' => 'GuruController@beriNilai']);
+        });
+
+        Route::group(['prefix' => 'data_diri'], function () {
+            Route::get('', ['as' => 'guru.data_diri', 'uses' => 'GuruController@dataDiri']);
+            Route::get('edit', ['as' => 'guru.data_diri.edit.form', 'uses' => 'GuruController@editDataDiriForm']);
+            Route::post('', ['as' => 'guru.data_diri.edit', 'uses' => 'GuruController@editDataDiri']);
+        });
+
     });
 
     Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@logout']);
