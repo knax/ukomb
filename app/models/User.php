@@ -5,9 +5,15 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+/**
+ * User
+ *
+ */
+class User extends Eloquent implements UserInterface {
 
-	use UserTrait, RemindableTrait;
+	public $timestamps = false;
+
+	use UserTrait;
 
 	/**
 	 * The database table used by the model.
